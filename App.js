@@ -9,12 +9,16 @@ db = new JSONdb('./store.json'),
 key = process.env.KEY || process.argv[3] || 'key';
 chalk = require('chalk'),
 argv = process.argv[2],
+pkg = require('./package.json'),
 port = process.env.PORT || argv || 3000;
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.get('/api/v1', (req, res) => {
     res.json(db.storage)
+})
+app.get('/github', (req, res) => {
+    res.redirect(pkg.homepage)
 })
 app.post('/api/v1', (req, res) => {
     db.set(req.body.key, req.body.value);
