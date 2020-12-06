@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/alestor123/WEB-ENV/issues"
   },
-  "homepage": "https://github.com/alestor123/WEB-ENV#readme"
+  "homepage": "https://github.com/alestor123/WEB-ENV#readme",
+  "dependencies": {
+    "express": "^4.17.1",
+    "i": "^0.3.6",
+    "npm": "^6.14.9",
+    "simple-json-db": "^1.2.2"
+  }
 }
