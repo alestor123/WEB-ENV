@@ -77,8 +77,9 @@ else if (!keys.includes(keyIn.value) || values.includes(valIn.value)){
     alert('Not Found')
 }
 else if (confirm('Are You Sure')){
+ var authKey =  prompt("Please enter your key", "Key")
     axios.put('/api/v1', {
-        authKey:prompt("Please enter your key", "Key"),
+        authKey:authKey,
         key:keyIn.value,
         value: valIn.value
         }).then((response) => {
