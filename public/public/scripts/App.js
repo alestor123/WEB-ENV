@@ -63,6 +63,8 @@ else if (confirm('Are You Sure')){
     }).catch((error)=> {
         console.log(error);
         alert(error)
+        alert(error.response.data)
+
     })
 }
 }
@@ -76,6 +78,7 @@ else if (!keys.includes(keyIn.value) || values.includes(valIn.value)){
 }
 else if (confirm('Are You Sure')){
     axios.put('/api/v1', {
+        authKey:prompt("Please enter your key", "Key"),
         key:keyIn.value,
         value: valIn.value
         }).then((response) => {
@@ -83,6 +86,7 @@ else if (confirm('Are You Sure')){
             alert(response.data);
         }).catch((error)=> {
             console.log(error);
+            alert(error.response.data)
             alert(error)
         })  
 }
