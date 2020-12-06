@@ -3,12 +3,13 @@
 require('dotenv').config()
 var express = require('express'),
 app = express(),
+path = require('path'),
 JSONdb = require('simple-json-db'),
 db = new JSONdb('./store.json'),
 chalk = require('chalk'),
 argv = process.argv[2],
 port = process.env.PORT || argv || 3000;
-
+app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.get('/api/v1', (req, res) => {
