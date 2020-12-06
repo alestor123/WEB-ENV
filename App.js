@@ -6,6 +6,7 @@ app = express(),
 path = require('path'),
 JSONdb = require('simple-json-db'),
 db = new JSONdb('./store.json'),
+key = process.env.KEY || process.argv[3] || 'key';
 chalk = require('chalk'),
 argv = process.argv[2],
 port = process.env.PORT || argv || 3000;
