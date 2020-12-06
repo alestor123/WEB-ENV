@@ -17,17 +17,17 @@ app.get('/api/v1', (req, res) => {
 })
 app.post('/api/v1', (req, res) => {
     db.set(req.body.key, req.body.value);
-    console.log('Created : '+req.body.key + ' : ' + req.body.value )
-    res.send('Created : '+req.body.key + ' : ' + req.body.value )
+    console.logDate() +req.ip +(chalk.green(req.ip + ' Created : '+req.body.key + ' : ' + req.body.value ))
+    res.send(req.ip +' Created : '+req.body.key + ' : ' + req.body.value )
 })
 app.delete('/api/:key', (req, res) => {
     db.delete(req.params.key);
-    console.log('Deleted : ' + req.params.key)
+    console.log(chalk.red(Date() +req.ip + ' Deleted : ' + req.params.key))
     res.send('Sucess')
 })
 app.put('/api/v1', (req, res) => {
     db.set(req.body.key, req.body.value);
-    console.log('Updated : '+req.body.key + ' : ' + req.body.value )
-    res.send('Updated : '+req.body.key + ' : ' + req.body.value )
+    console.log(chalk.yellow(Date() +req.ip +'Updated : '+req.body.key + ' : ' + req.body.value) )
+    res.send(Date() +req.ip +'Updated : '+req.body.key + ' : ' + req.body.value )
 })
-app.listen(port, () => console.log(chalk.green(`Server running at ${port}`)))
+app.listen(port, () => console.log(chalk.greenBright(`Server running at ${port}`)))
