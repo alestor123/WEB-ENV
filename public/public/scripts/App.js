@@ -1,65 +1,89 @@
-// for the love of god dont use it have to clean and imporove was made in a hurry will improve later
 var addButton = document.getElementById('addButton'),
 varAdd = document.getElementById('varAdd'),
 keyIn = document.getElementById('addVarin'),
 valIn = document.getElementById('addVarinn'),
 tableCon = document.getElementById('tableCon');
+refresh()
+function refresh(){
 axios.get('/api/v1')
 .then((response) => {
 values = Object.values(response.data)
 keys = Object.keys(response.data)
-keys.forEach(setTable);
-  console.log(Object.keys(response.data));
-  console.log(Object.values(response.data))
-
+tableCon.innerHTML = "";
+keys.forEach((item,index)=>{tableCon.innerHTML += "<tr>" + "<td>" + index + "</td>" + "<td>" + item + "</td>" + '<td>' + values[index] + '</td> '+ "</tr>" });
 })  .catch((error)=> {
     console.log(error);
     alert(error)
-})  
+}) 
+} 
+function Validation(){
+    if(keyIn.value==""){
+        alert('please fill out input')
+    return false
+    }
+    else if(valIn.value=="") {
+        alert('please fill out value')
+        return false
+    }
+    else{
+        return true
+    }
+    
+}
 
-function Save(){
-if(addVarin.value==""){
-    alert('please fill out input')
-}
-else if(addVarinn.value=="") {
-    alert('please fill out value')
-}
-else{
-Create(keyIn.value,valIn.value)
-}
-}
-function setTable(item,index) {
-    console.log(item)
-tableCon.innerHTML += "<tr>" + "<td>" + index + "</td>" + "<td>" + item + "</td>" + '<td>' + values[index] + '</td> '+ "</tr>" 
-}
-function Delete(key){
-axios.delete(`http://localhost:3000/api/${key}`, {
-}).then((response) => {
-    alert(response.data);
-}).catch((error)=> {
-    console.log(error);
-    alert(error)
-})  
-}
-function Update(key,value){
-    axios.put('http://localhost:3000/api/v1', {
-        key:key,
-        value: value
+// api 
+
+function Create(){
+    if(Validation()){
+    axios.post('/api/v1', {
+        key:keyIn.value,
+        value: valIn.value
         }).then((response) => {
+            alert(response.data);
+            refresh()
+        }).catch((error)=> {
+            console.log(error);
+            alert(error)
+        })  
+}}
+
+
+function Delete(){
+if(keyIn.value==""){
+        alert('please fill out input')
+} 
+else if (!keys.includes(keyIn.value) || values.includes(valIn.value)){
+    alert('Not Found')
+}
+else if (confirm('Are You Sure')){
+    axios.delete(`/api/${keyIn.value}`, {
+    }).then((response) => {
+        alert(response.data);
+        refresh()
+    }).catch((error)=> {
+        console.log(error);
+        alert(error)
+    })
+}
+}
+
+function Update(){
+    if(keyIn.value==""){
+        alert('please fill out input')
+} 
+else if (!keys.includes(keyIn.value) || values.includes(valIn.value)){
+    alert('Not Found')
+}
+else if (confirm('Are You Sure')){
+    axios.put('/api/v1', {
+        key:keyIn.value,
+        value: valIn.value
+        }).then((response) => {
+            refresh()
             alert(response.data);
         }).catch((error)=> {
             console.log(error);
             alert(error)
         })  
 }
-function Create(key,value){
-    axios.post('http://localhost:3000/api/v1', {
-        key:key,
-        value: value
-        }).then((response) => {
-            alert(response.data);
-        }).catch((error)=> {
-            console.log(error);
-            alert(error)
-        })  
 }
