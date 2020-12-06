@@ -6,12 +6,12 @@ value:3000
     console.log(response.data);
 })
 // // add web 
-// add are you sure 
+// add confirm 
 // add logger 
 // imporove code
-// update mvc 
 // add auth 
 // convert env 
 // add cli
 // add docs 
+// clean Store json
 // publish 
