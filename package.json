@@ -20,9 +20,11 @@
   "homepage": "https://github.com/alestor123/WEB-ENV#readme",
   "dependencies": {
     "axios": "^0.21.0",
+    "body-parser": "^1.19.0",
     "chalk": "^4.1.0",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
+    "json-to-env": "0.0.10",
     "simple-json-db": "^1.2.2"
   }
 }
