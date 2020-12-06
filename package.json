@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "This is a simple code for a web powered env variable managemant tool (web-env)",
   "main": "App.js",
+  "bin": {
+    "web-env": "App.js"
+  },
   "scripts": {
     "start": "node App.js",
     "dev": "nodemon App.js",
