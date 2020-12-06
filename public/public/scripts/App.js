@@ -5,7 +5,7 @@ valIn = document.getElementById('addVarinn'),
 tableCon = document.getElementById('tableCon');
 refresh()
 function refresh(){
-axios.get('/api/v1')
+axios.get('/api')
 .then((response) => {
 values = Object.values(response.data)
 keys = Object.keys(response.data)
