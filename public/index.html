@@ -20,21 +20,22 @@
 <div id="varAdd">
 <input type="text" placeholder="Key" id="addVarin" >  
 <input type="text" placeholder="Value" id="addVarinn">
-<button type="button" class="btn btn-danger"> <i class="fas fa-minus-circle"></i>  Delete</button>
+<button type="button" class="btn btn-danger" onclick="Delete(keyIn.value)"> <i class="fas fa-minus-circle"></i>  Delete</button>
 </div>
 <div>
     <table class="table table-striped">
         <thead>
           <tr>
-            <th scope="col">Key</th>Thornton	
+            <th scope="col">Number</th>
+            <th scope="col">Key</th>
             <th scope="col">Value</th>
           </tr>
         </thead>
-        <tbody>
-          
-        </tbody>
+        <tbody id="tableCon">
+          </tbody>
       </table>  
 <button type="button" id="addButton" class="btn btn-success" onclick="Save()"> <i class="fas fa-save"></i>  Add variable </button>
+<button type="button" id="addButton" class="btn btn-success" onclick="Update(keyIn.value,valIn.value)"> <i class="fas fa-save"></i>  Update</button>
 </div>
 
 <script src="public/scripts/App.js"></script>
