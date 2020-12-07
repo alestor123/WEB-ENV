@@ -11,17 +11,45 @@ store = JSON.stringify(db.storage),
 key = process.env.KEY || process.argv[3] || 'key';
 chalk = require('chalk'),
 argv = process.argv[2],
-pkg = require('./package.json'),
+pck = require('./package.json'),
 port = process.env.PORT || argv || 3000;
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+if(argv== '-v' ||argv == '--version'){
+    console.log( `${pck.version}`)
+  process.exit(1);
+}
+else if (argv =='-h'|| argv == '--help') { // checking undifined args
+    console.log(`
+    Usage: ${pck.name} <Port> <Key>
+`);
+}
+else if (argv =='-i'|| argv == '--issue') { // checking undifined args
+  console.log(`
+  Issues at ${pck.bugs.url} 
+`);
+}
+
+else if (argv =='-a'|| argv == '--author') { // checking undifined args
+  console.log(`
+  Author: ${pck.author} 
+`);
+}
+
+else if (argv =='-d'|| argv == '--docs') { // checking undifined args
+  console.log(`
+  Docs at ${pck.homepage} 
+`);}
+else{
 updateEnv()
+app.listen(port, () => console.log(chalk.greenBright(`Server running at ${port}`)))
+}
 app.get('/api', (req, res) => {
     res.json(db.storage)
 })
 app.get('/github', (req, res) => {
-    res.redirect(pkg.homepage)
+    res.redirect(pck.homepage)
 })
 app.post('/api/v1', (req, res) => {
     db.set(req.body.key, req.body.value);
@@ -51,7 +79,6 @@ app.put('/api/v1', (req, res) => {
     })
     
     
-app.listen(port, () => console.log(chalk.greenBright(`Server running at ${port}`)))
 function updateEnv(){
 store = JSON.stringify(db.storage)
         fs.writeFile('./.env', store.replace(/{|}|"/g,'').replace(/:|"/g,'=').replace(/,/g,'\n'), (err) => {
