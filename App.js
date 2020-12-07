@@ -16,6 +16,7 @@ port = process.env.PORT || argv || 3000;
 app.use(express.static(path.join(__dirname, 'public')))
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+updateEnv()
 app.get('/api', (req, res) => {
     res.json(db.storage)
 })
@@ -38,7 +39,6 @@ app.delete('/api/:key', (req, res) => {
 )
 app.put('/api/v1', (req, res) => {
     if(req.body.authKey==key){
-
     db.set(req.body.key, req.body.value);
     console.log(chalk.yellow(Date() +req.ip +'Updated : '+req.body.key + ' : ' + req.body.value) )
     res.send(Date() +req.ip +'Updated : '+req.body.key + ' : ' + req.body.value )
@@ -50,15 +50,16 @@ app.put('/api/v1', (req, res) => {
     })
     
     
-    app.listen(port, () => console.log(chalk.greenBright(`Server running at ${port}`)))
-function authErr(res,req){
-    res.status(401).send('Auth Error')
-        console.log(chalk.red(Date() + ':' + req.ip + ' Auth Error 401'))
-}
-function updateEnv(req){
-        console.log(chalk.green(Date() + 'Update env'))
-        fs.writeFile('.env', store.replace(/{|}|"/g,'').replace(/:|"/g,'=').replace(/,/g,'\n'), (err) => {
+app.listen(port, () => console.log(chalk.greenBright(`Server running at ${port}`)))
+function updateEnv(){
+store = JSON.stringify(db.storage)
+        fs.writeFile('./.env', store.replace(/{|}|"/g,'').replace(/:|"/g,'=').replace(/,/g,'\n'), (err) => {
             if (err) throw err;
             console.log(chalk.green(Date()+'Updated Env!'));
           });
+
+        }
+    function authErr(res,req){
+    res.status(401).send('Auth Error')
+        console.log(chalk.red(Date() + ':' + req.ip + ' Auth Error 401'))
 }
