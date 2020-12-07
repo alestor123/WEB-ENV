@@ -30,6 +30,7 @@ app.post('/api/v1', (req, res) => {
     updateEnv()
 })
 app.delete('/api/:key', (req, res) => {
+    res.header('"Content-Type": "application/json;charset=utf-8 ')
     db.delete(req.params.key);
     console.log(chalk.red(Date() +req.ip + ' Deleted : ' + req.params.key))
     res.send('Sucess')
