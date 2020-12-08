@@ -52,7 +52,7 @@ function Delete(){
 if(keyIn.value==""){
         alert('please fill out input')
 } 
-else if (!keys.includes(keyIn.value) || values.includes(valIn.value)){
+else if (!keys.includes(keyIn.value)){
     alert('Not Found')
 }
 else if (confirm('Are You Sure')){
