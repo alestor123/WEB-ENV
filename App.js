@@ -54,6 +54,10 @@ app.get('/github', (req, res) => {
     res.redirect(pck.homepage)
 })
 app.post('/api/v1', (req, res) => {
+  if(store.includes(req.body.key)) {
+    res.status(409).send('Already Exist')
+  
+  } 
     db.set(req.body.key, req.body.value);
     console.log(chalk.green(Date() + req.ip + ' Created : '+req.body.key + ' : ' + req.body.value ))
     res.send(req.ip +' Created : '+req.body.key + ' : ' + req.body.value )

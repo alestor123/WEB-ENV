@@ -43,6 +43,7 @@ function Create(){
             refresh()
         }).catch((error)=> {
             console.log(error);
+            alert(error.response.data)
             alert(error)
         })  
 }}
