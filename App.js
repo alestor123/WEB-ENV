@@ -9,6 +9,7 @@ JSONdb = require('simple-json-db'),
 db = new JSONdb('./store.json'),
 store = JSON.stringify(db.storage),
 key = process.env.KEY || process.argv[3] || 'key';
+pathtoEnv = process.argv[4] || process.argv.PATH || './.env',
 chalk = require('chalk'),
 argv = process.argv[2],
 pck = require('./package.json'),
@@ -82,7 +83,7 @@ app.put('/api/v1', (req, res) => {
     
 function updateEnv(){
 store = JSON.stringify(db.storage)
-        fs.writeFile('./.env', store.replace(/{|}|"/g,'').replace(/:|"/g,'=').replace(/,/g,'\n'), (err) => {
+        fs.writeFile(pathtoEnv, store.replace(/{|}|"/g,'').replace(/:|"/g,'=').replace(/,/g,'\n'), (err) => {
             if (err) throw err;
             console.log(chalk.green(Date()+'Updated Env!'));
           });

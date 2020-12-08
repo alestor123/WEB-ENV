@@ -54,7 +54,7 @@ KEY= key
 PORT=3000
 ```
 # Step By Step Usage
-
+this is a weip project and its still in development 
 
 WIP
 
