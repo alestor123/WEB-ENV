@@ -46,7 +46,8 @@ function Create(){
             alert(error.response.data)
             alert(error)
         })  
-}}
+}
+}
 
 
 function Delete(){
@@ -68,11 +69,15 @@ else if (confirm('Are You Sure')){
 
     })
 }
+
+else{
+    alert('Abort')
+    }
 }
 
 function Update(){
-    if(keyIn.value==""){
-        alert('please fill out input')
+if(!Validation()) {
+    console.log('validation err')
 } 
 else if (!keys.includes(keyIn.value) || values.includes(valIn.value)){
     alert('Not Found')
@@ -91,5 +96,8 @@ else if (confirm('Are You Sure')){
             alert(error.response.data)
             alert(error)
         })  
+}
+else{
+alert('Abort')
 }
 }
