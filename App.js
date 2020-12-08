@@ -43,6 +43,7 @@ else if (argv =='-d'|| argv == '--docs') { // checking undifined args
 `);}
 else{
 updateEnv()
+console.log(chalk.greenBright(`Key : ${key}`))
 app.listen(port, () => console.log(chalk.greenBright(`Server running at ${port}`)))
 }
 app.get('/api', (req, res) => {
